@@ -38,6 +38,12 @@ public class ClasspathProperties {
 			if (showStacktraces) {
 				iox.printStackTrace();
 			}
+		} finally {
+			if(is != null) {
+				try {
+					is.close();
+				} catch (IOException iox) { /* Ignore me */ }
+			}
 		}
 	}
 
