@@ -25,7 +25,7 @@ public class ClasspathProperties {
 	 * @param resourceName The filename on the classpath to use as a source for properties information.
 	 */
 	public ClasspathProperties(String resourceName) {
-		InputStream is = ClasspathProperties.class.getClassLoader().getResourceAsStream((resourceName == null ? "" : resourceName));
+		InputStream is = ClasspathLoader.fileInputStream(resourceName);
 		this.props = new Properties();
 		try {
 			if (is != null) {
