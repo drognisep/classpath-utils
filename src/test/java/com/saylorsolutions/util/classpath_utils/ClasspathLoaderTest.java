@@ -69,14 +69,13 @@ class ClasspathLoaderTest {
 		assertTrue(f.exists());
 		assertFalse(f.isDirectory());
 	}
-	
+
 	@Test
 	void testGetZipFileData() throws Exception {
 		BufferedReader br = new BufferedReader(
-				new InputStreamReader(
-						ClasspathLoader.zipFileInputStream("archive.zip", "folder/Test File 3")));
+				new InputStreamReader(ClasspathLoader.zipFileInputStream("archive.zip", "folder/Test File 3")));
 		String line = null;
-		while((line = br.readLine()) != null) {
+		while ((line = br.readLine()) != null) {
 			System.out.println(line);
 		}
 		assertEquals("Test File 3", line);

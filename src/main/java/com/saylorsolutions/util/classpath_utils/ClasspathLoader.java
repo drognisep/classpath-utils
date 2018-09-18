@@ -11,15 +11,14 @@ import java.util.zip.ZipFile;
 
 public class ClasspathLoader {
 	/**
-	 * Creates an {@code InputStream} for the file specified by the {@code filename} parameter.
-	 * In the case of the base directory specified below: <br/>
+	 * Creates an {@code InputStream} for the file specified by the {@code filename}
+	 * parameter. In the case of the base directory specified below: <br/>
 	 * <br/>
 	 * {@code BASE_DIR=$PROJECT_LOCATION/src/main/resources}<br/>
 	 * <br/>
 	 * The {@code filename} parameter without a path prefix would reference files in
-	 * {@code $BASE_DIR}. Adding a path prefix like
-	 * {@code "folder/"} would follow the specified path
-	 * {@code $BASE_DIR/folder}.
+	 * {@code $BASE_DIR}. Adding a path prefix like {@code "folder/"} would follow
+	 * the specified path {@code $BASE_DIR/folder}.
 	 * 
 	 * @param filename The name and path of the file to be referenced, relative to
 	 *                 the base directory.
@@ -32,15 +31,15 @@ public class ClasspathLoader {
 	}
 
 	/**
-	 * Creates a {@code BufferedReader} for the file specified by the {@code filename} parameter.
-	 * In the case of the base directory specified below: <br/>
+	 * Creates a {@code BufferedReader} for the file specified by the
+	 * {@code filename} parameter. In the case of the base directory specified
+	 * below: <br/>
 	 * <br/>
 	 * {@code BASE_DIR=$PROJECT_LOCATION/src/main/resources}<br/>
 	 * <br/>
 	 * The {@code filename} parameter without a path prefix would reference files in
-	 * {@code $BASE_DIR}. Adding a path prefix like
-	 * {@code "folder/"} would follow the specified path
-	 * {@code $BASE_DIR/folder}.
+	 * {@code $BASE_DIR}. Adding a path prefix like {@code "folder/"} would follow
+	 * the specified path {@code $BASE_DIR/folder}.
 	 * 
 	 * @param filename The name and path of the file to be referenced, relative to
 	 *                 the base directory.
@@ -65,13 +64,16 @@ public class ClasspathLoader {
 	public static String fileContents(String filename) {
 		StringBuilder builder = new StringBuilder();
 		BufferedReader reader = fileBufferedReader(filename);
-		if(reader != null) {
+		if (reader != null) {
 			reader.lines().forEach(line -> builder.append(line));
-			try { reader.close(); } catch (IOException iox) { /* Ignore */ }
+			try {
+				reader.close();
+			} catch (IOException iox) {
+				/* Ignore */ }
 		}
 		return builder.toString();
 	}
-	
+
 	public static ZipFile zip(String zipFileName) {
 		File fileReference = fileReference(zipFileName);
 		try {
@@ -103,7 +105,7 @@ public class ClasspathLoader {
 
 		return null;
 	}
-	
+
 	public static BufferedReader zipFileBufferedReader(String zipFileName, String fileWithinArchive) {
 		InputStream is = zipFileInputStream(zipFileName, fileWithinArchive);
 		return (is != null ? wrapInBufferedReader(is) : null);
@@ -126,7 +128,7 @@ public class ClasspathLoader {
 	private static BufferedReader wrapReaderInBufferedReader(InputStreamReader inputStreamReader) {
 		return inputStreamReader != null ? new BufferedReader(inputStreamReader) : null;
 	}
-	
+
 	private static BufferedReader wrapInBufferedReader(InputStream resourceAsStream) {
 		return (resourceAsStream != null ? new BufferedReader(new InputStreamReader(resourceAsStream)) : null);
 	}
