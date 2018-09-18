@@ -75,9 +75,8 @@ class ClasspathLoaderTest {
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader(ClasspathLoader.zipFileInputStream("archive.zip", "folder/Test File 3")));
 		String line = null;
-		while ((line = br.readLine()) != null) {
-			System.out.println(line);
-		}
+		line = br.readLine();
+		assertNotNull(line);
 		assertEquals("Test File 3", line);
 	}
 }
